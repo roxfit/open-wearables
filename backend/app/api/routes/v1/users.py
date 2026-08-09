@@ -60,7 +60,10 @@ def create_user(payload: UserCreate, db: DbSession, _api_key: ApiKeyDep):
 
 
 @router.delete("/users/{user_id}", response_model=UserRead)
-def delete_user(user_id: UUID, db: DbSession, _developer: DeveloperDep):
+def delete_user(user_id: UUID, db: DbSession, _api_key: ApiKeyDep):
+    # ROXFIT FORK PATCH: upstream requires a developer JWT here, but
+    # roxfit-server's GDPR erasure cascade authenticates with the API key
+    # (same as create_user). Without this, account deletion 401s.
     return user_service.delete(db, user_id, raise_404=True)
 
 
