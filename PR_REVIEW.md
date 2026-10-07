@@ -12,6 +12,16 @@ GitHub `main` sampled at [`36dfa7c7f661`](https://github.com/roxfit/open-wearabl
 - Prefer a few high-confidence findings; deduplicate existing comments and omit lint/style restatements, speculative refactors and unrelated pre-existing bugs. A passing CI run does not imply every suite or hardware path ran. State exactly what was inspected/tested and what remains unverified.
 - Reviews are advisory by default. Use read-only GitHub permissions for collection, an isolated environment for untrusted PR tests and no production credentials. Posting reviews requires an explicitly configured write permission; never run migrations, deploy or mutate customer/provider state as part of ordinary review.
 
+## Team rules
+
+- Every PR needs a Linear ticket created by Penny. The first line of the body is "[Agent] " followed by clickable ROX ticket links (full Linear URLs), then a plain description. A missing ticket or link is a review blocker.
+- Bot-opened PR titles start with "[Agent] ". A Slack message a bot sends as a person's account starts with "[Agent] " as well. Human-written titles and messages stay unmarked.
+- Bot-written titles, bodies, comments and commit messages use a normal hyphen, with no em dash or en dash.
+- Nothing merges without Ben's explicit approval for that specific PR. A list of PRs is approved one at a time.
+- Stacked PRs name the base PR and merge order in the body. After the parent merges, retarget the child to main before deleting the parent branch; deleting the parent first closes the child. After a squash merge of the parent, fix conflicts with a merge commit from main and do not force-push.
+- CI must be green before QA. QA is done one branch at a time. QA failures go back to the author (Devo for bot fixes). The author does not QA their own fix.
+- When Ben signs off a fix, move the linked ROX tickets to In QA and assign them to Ben.
+
 ## Critical files and change routing
 
 **Start with these files when the PR touches the associated behavior.** Their importance sets review scope, not automatic finding severity. Follow their current callers and tests; the existing directory map below provides broader context.
@@ -109,7 +119,7 @@ Follow root and component AGENTS guidance. `make test` runs `uv run pytest -v --
 
 roxfit-server is the integration client and supplies the account erasure/disconnect cascade; roxfit-app exposes wearable connection state. Most history belongs to upstream, and the sampled ROXFIT fork has only one merged PR. Preserve upstream attribution and evaluate new auth behavior against the actual fork.
 
-For any shared change, identify producer and consumers, add a representative payload/fixture, check old/new combinations and state deployment order. Load the counterpart repository's PR_REVIEW.md when available; report unavailable context rather than inventing compatibility.
+For any shared change, identify producer and consumers, add a representative payload/fixture, and check old/new combinations. When a PR depends on another repository, write the deploy order in the body (for example, this API and its workers before the roxfit-app or roxfit-server release that calls them). Load the counterpart repository's PR_REVIEW.md when available; report unavailable context rather than inventing compatibility.
 
 ## Maintaining this guide
 
