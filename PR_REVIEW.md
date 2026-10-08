@@ -23,7 +23,7 @@ GitHub `main` sampled at [`36dfa7c7f661`](https://github.com/roxfit/open-wearabl
 - When Ben signs off a fix, move the linked ROX tickets to In QA and assign them to Ben.
 - Review a PR only once all its checks have finished, including Bugbot. Do not review while any action is still running.
 - Every review uses Bugbot's results on the current head. A High or Medium Bugbot finding with customer-facing impact is a blocker unless it is verified fixed at the head. Low or internal-only findings are notes.
-- The linked ROX ticket needs a QA steps checklist written as user actions (how to reproduce and how to test, with platform and setup). A PR whose ticket has no QA steps is not ready for QA.
+- The linked ROX ticket needs a QA section: a checklist of manual steps in the app (or CMS or watch), written as user actions with setup, how to reproduce, how to test and what should show on screen. Never Postman, curl or API calls. Add a Dev QA section only when something needs a separate developer check that the manual steps don't cover. A PR whose ticket has no QA section is not ready for QA.
 
 ## Critical files and change routing
 
