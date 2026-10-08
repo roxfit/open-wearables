@@ -21,6 +21,9 @@ GitHub `main` sampled at [`36dfa7c7f661`](https://github.com/roxfit/open-wearabl
 - Stacked PRs name the base PR and merge order in the body. After the parent merges, retarget the child to main before deleting the parent branch; deleting the parent first closes the child. After a squash merge of the parent, fix conflicts with a merge commit from main and do not force-push.
 - CI must be green before QA. QA is done one branch at a time. QA failures go back to the author (Devo for bot fixes). The author does not QA their own fix.
 - When Ben signs off a fix, move the linked ROX tickets to In QA and assign them to Ben.
+- Review a PR only once all its checks have finished, including Bugbot. Do not review while any action is still running.
+- Every review uses Bugbot's results on the current head. A High or Medium Bugbot finding with customer-facing impact is a blocker unless it is verified fixed at the head. Low or internal-only findings are notes.
+- The linked ROX ticket needs a QA steps checklist written as user actions (how to reproduce and how to test, with platform and setup). A PR whose ticket has no QA steps is not ready for QA.
 
 ## Critical files and change routing
 
